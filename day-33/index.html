@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <h1>day-33 REACTJS Introduction</h1>
+
+    <div id="root"></div>
+    <div id="text"></div>
+    <div id="image"></div>
+    <div id="selecting"></div>
+
+
+    <script type="text/babel">
+        // React code will go here
+        function Hello() {
+            return <h1> Hello React</h1>
+        }
+        ReactDOM.render(<Hello />, document.getElementById("root"))
+
+        function CreateText() {
+            return <p> texttttt </p>
+        }
+        ReactDOM.render(<CreateText />, document.getElementById("text"))
+
+        function InsertImage() {
+            return <img src="https://plus.unsplash.com/premium_photo-1664361480777-01a3ccf5ffdc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" />
+        }
+        ReactDOM.render(<InsertImage />, document.getElementById("image"))
+
+        function Selector() {
+            return <select name="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+        }
+        ReactDOM.render(<Selector />, document.getElementById("selecting"))
+
+    </script>
+
+
+
+
+
+    <script crossorigin="" src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin="" src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+</body>
+
+</html>
