@@ -40,6 +40,8 @@ function App() {
         <ProductFunc2 />
         <ProductFunc3 />
         <ProductFunc4 />
+        <ProductFunc4 />
+
         
         
 
