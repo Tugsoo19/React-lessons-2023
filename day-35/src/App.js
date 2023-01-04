@@ -17,7 +17,7 @@ function Profile(props) {
 
   return (
     <div className='profile'>
-      <img src={props.img} alt='people' />
+      {/* <img src={props.img} alt='people' /> */}
 
       {/* ----------- destructuring */}
       <img src={img} alt='people' />
@@ -48,7 +48,7 @@ function App() {
   return (
     <div className="App">
       <Profile
-        img="public/avatars/steve.jpg"
+        img="avatars/steve.jpg"
         name="John Smith"
         age={20}
         profession='IT'
@@ -60,7 +60,7 @@ function App() {
       />
 
       <Profile
-        img="img/profile-2.png"
+        img="avatars/molly.png"
         name="Linda Smith"
         age={34}
         profession='Manager'
