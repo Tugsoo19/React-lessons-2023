@@ -7,7 +7,7 @@ import './App.css';
 // import img4 from 'products/image-yellow.png'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'font-awesome/css/font-awesome.min.css'
+
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
 import Product1 from './Product';
@@ -40,7 +40,7 @@ function App() {
         <ProductFunc2 />
         <ProductFunc3 />
         <ProductFunc4 />
-        <ProductFunc4 />
+        
 
         
         
