@@ -6,9 +6,7 @@ import './App.css';
 // import img3 from 'products/image-steel.png'
 // import img4 from 'products/image-yellow.png'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
 
-import 'bootstrap-icons/font/bootstrap-icons.css'
 
 import Product1 from './Product';
 import Product2 from './Product2';
