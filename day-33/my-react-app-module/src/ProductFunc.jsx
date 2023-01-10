@@ -34,24 +34,81 @@
 
 // export  {ProductFunc , ProductFunc2}
 
+import products from "./seed";
+import { useState } from "react";
+import { Rating } from 'react-simple-star-rating'
 
-function ProductFunc(props) {
+export default function ProductFunc(props) {
+
+    const [votes, setVotes] = useState(props.votes)
+    const [stars, setStars] = useState(props.votes)
+
+    function handleDownVote(props) {
+        setStars(stars - 1)
+        // if (stars < 5) {
+        //     setStars()
+        // } else {
+        //     setStars(stars - 1)
+        // }
+
+    }
+
+    function handleUpVote(props) {
+        setVotes(votes + 1)
+
+        if (stars > 5) {
+            setStars(0)
+        } else {
+            setStars(stars + 1)
+        }
+
+
+        // console.log("upvoted");
+        // console.log(props.id);
+        // let newProducts = []
+
+        // const foundProduct = products.map(product => {
+        //     if(product.id === props.id) {
+        //         product.votes = product.votes + 1;
+        //     }  
+        //     return product    
+        // }) 
+        // console.log(foundProduct); 
+
+
+    }
+
     return (
         <div className="section">
             <img src={props.productImageUrl} className="image"></img>
             <div className="right-text">
-                <p><i className="bi bi-caret-up-fill"></i>{props.votes}</p>
-                <p>{props.title}</p>
-                <p>{props.description}</p>
-                <span>Submitted By: </span>
-                <img className='ui-avatar' src={props.submitterAvatarUrl}></img>
+                <a onClick={() => { handleUpVote(props) }}>
+                    <i class="bi bi-caret-up-fill"></i>
+                </a>
 
-            </div>
+                {votes}
+                <a onClick={() => { handleDownVote(props) }}>
+                    <i class="bi bi-caret-down-fill"></i>
+                </a>
+
+            <Rating
+                initialValue={stars}
+            />
+
+            <p>{props.title}</p>
+            <p>{props.description}</p>
+            <span>Submitted By: </span>
+
+            <img className='ui-avatar' src={props.submitterAvatarUrl}></img>
+
         </div>
+        </div >
     )
 }
 
 
 
 
-export default ProductFunc
+
+
+

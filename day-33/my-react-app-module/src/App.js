@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
+
 
 // import img1 from 'products/image-aqua.png'
 // import img2 from 'products/image-rose.png'
@@ -34,22 +36,23 @@ function App() {
       votes={product.votes}
       submitterAvatarUrl={product.submitterAvatarUrl}
       productImageUrl={product.productImageUrl}
+      stars = {product.stars}
     />
   })
 
-  const productList2 = products.map((product)=>{
+  // const productList2 = products.map((product)=>{
     
-    return <Product1
-      id={product.id}
-      title={product.title}
-      description={product.description}
-      url={product.url}
-      votes={product.votes}
-      submitterAvatarUrl={product.submitterAvatarUrl}
-      productImageUrl={product.productImageUrl}
-    />
-  }
-  )
+  //   return <Product1
+  //     id={product.id}
+  //     title={product.title}
+  //     description={product.description}
+  //     url={product.url}
+  //     votes={product.votes}
+  //     submitterAvatarUrl={product.submitterAvatarUrl}
+  //     productImageUrl={product.productImageUrl}
+  //   />
+  // }
+  // )
 
   return (
     <div className="App">
@@ -61,7 +64,7 @@ function App() {
       <h1 className="header">Popular Products</h1>
       <div className="body">
         {productList}
-        {productList2}
+        {/* {productList2} */}
 
         {/* <Product1 />
         <Product2 />
