@@ -26,26 +26,29 @@ import Product1 from './Product';
 
 
 function App() {
-  const [productListA,setProductList] = useState(products)
-  
-  function handleProductUpvote(productID){
+  const [productList, setProductList] = useState(products)
+
+  function handleProductUpvote(productID) {
     console.log('upvoted', productID);
-    const foundProduct = products.filter(product => {
-      if(product.id == productID){
-        return product
-      }
-    })
+    // const foundProduct = products.filter(product => {
+    //   if (product.id == productID) {
+    //     return product
+        
+    //   }
+    // })
+
     // console.log(foundProduct[0].votes);
     // foundProduct[0].votes = foundProduct[0].votes + 1;
     // console.log(foundProduct[0].votes);
 
     /// change votes in product array
-    
-    console.log(products);
-    const newProducts = productListA.map(product => {
+
+    // console.log(products);
+    const newProducts = productList.map(product => {
       if (product.id == productID) {
         return Object.assign({}, product, {
-          votes: product.votes + 1
+          votes: product.votes + 1,
+          stars: product.votes >= 50 ? product.stars + 1  : product.stars
         })
       } else {
         return product
@@ -56,8 +59,40 @@ function App() {
 
   }
 
-  const productList = products.map((product) => {
-    
+  function handleProductDownvote(productID) {
+    console.log('Downvoted', productID);
+    const foundProduct = products.filter(product => {
+      if (product.id == productID) {
+        return product
+      }
+    })
+
+    // console.log(foundProduct[0].votes);
+    // foundProduct[0].votes = foundProduct[0].votes + 1;
+    // console.log(foundProduct[0].votes);
+
+    /// change votes in product array
+
+    console.log(products);
+    const newProducts = productList.map(product => {
+      if (product.id == productID) {
+        return Object.assign({}, product, {
+          votes: product.votes - 1,
+          stars: product.votes <= 50 ? product.stars - 1  : product.stars
+        })
+      } else {
+        return product
+      }
+    })
+    console.log(newProducts);
+    setProductList(newProducts)
+
+  }
+
+
+
+  const productComponent = productList.map((product) => {
+
     return <ProductFunc
       id={product.id}
       title={product.title}
@@ -66,13 +101,14 @@ function App() {
       votes={product.votes}
       submitterAvatarUrl={product.submitterAvatarUrl}
       productImageUrl={product.productImageUrl}
-      onVote = {handleProductUpvote}
-      stars = {product.stars}
+      onVote={handleProductUpvote}
+      downVote={handleProductDownvote}
+      stars={product.stars}
     />
   })
 
   // const productList2 = products.map((product)=>{
-    
+
   //   return <Product1
   //     id={product.id}
   //     title={product.title}
@@ -94,7 +130,7 @@ function App() {
 
       <h1 className="header">Popular Products</h1>
       <div className="body">
-        {productList}
+        {productComponent}
         {/* {productList2} */}
 
         {/* <Product1 />
