@@ -40,11 +40,11 @@ import { Rating } from 'react-simple-star-rating'
 
 export default function ProductFunc(props) {
 
-    const [votes, setVotes] = useState(props.votes)
+    // const [votes, setVotes] = useState(props.votes)
     const [stars, setStars] = useState(props.votes)
 
     function handleDownVote(props) {
-        setStars(stars - 1)
+        // setStars(stars - 1)
         // if (stars < 5) {
         //     setStars()
         // } else {
@@ -54,13 +54,13 @@ export default function ProductFunc(props) {
     }
 
     function handleUpVote(props) {
-        setVotes(votes + 1)
+        // setVotes(votes + 1)
 
-        if (stars > 5) {
-            setStars(0)
-        } else {
-            setStars(stars + 1)
-        }
+        // if (stars > 5) {
+        //     setStars(0)
+        // } else {
+        //     setStars(stars + 1)
+        // }
 
 
         // console.log("upvoted");
@@ -82,14 +82,14 @@ export default function ProductFunc(props) {
         <div className="section">
             <img src={props.productImageUrl} className="image"></img>
             <div className="right-text">
-                <a onClick={() => { handleUpVote(props) }}>
+                <a onClick={() => props.onVote(props.id)}>
                     <i class="bi bi-caret-up-fill"></i>
                 </a>
 
-                {votes}
-                <a onClick={() => { handleDownVote(props) }}>
+                {props.votes}
+                {/* <a onClick={() => { handleDownVote(props) }}>
                     <i class="bi bi-caret-down-fill"></i>
-                </a>
+                </a> */}
 
             <Rating
                 initialValue={stars}

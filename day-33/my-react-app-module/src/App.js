@@ -4,7 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
-
+import { useState } from 'react';
 // import img1 from 'products/image-aqua.png'
 // import img2 from 'products/image-rose.png'
 // import img3 from 'products/image-steel.png'
@@ -26,6 +26,36 @@ import Product1 from './Product';
 
 
 function App() {
+  const [productListA,setProductList] = useState(products)
+  
+  function handleProductUpvote(productID){
+    console.log('upvoted', productID);
+    const foundProduct = products.filter(product => {
+      if(product.id == productID){
+        return product
+      }
+    })
+    // console.log(foundProduct[0].votes);
+    // foundProduct[0].votes = foundProduct[0].votes + 1;
+    // console.log(foundProduct[0].votes);
+
+    /// change votes in product array
+    
+    console.log(products);
+    const newProducts = productListA.map(product => {
+      if (product.id == productID) {
+        return Object.assign({}, product, {
+          votes: product.votes + 1
+        })
+      } else {
+        return product
+      }
+    })
+    console.log(newProducts);
+    setProductList(newProducts)
+
+  }
+
   const productList = products.map((product) => {
     
     return <ProductFunc
@@ -36,6 +66,7 @@ function App() {
       votes={product.votes}
       submitterAvatarUrl={product.submitterAvatarUrl}
       productImageUrl={product.productImageUrl}
+      onVote = {handleProductUpvote}
       stars = {product.stars}
     />
   })
