@@ -5,6 +5,7 @@ import Counter from './component/counter';
 import UpdateArrays from './component/UpdateArrays';
 import List from './component/SpreadArray';
 import UpdatingObjects from './component/UpdatingObjects';
+import Exercises from './component/Exercises';
 
 function App() {
  
@@ -20,7 +21,7 @@ function App() {
       <UpdateArrays/>
       <List/>
       <UpdatingObjects/>
-      
+      <Exercises />
     </div>
     
   );
