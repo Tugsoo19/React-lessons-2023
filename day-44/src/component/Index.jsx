@@ -21,6 +21,8 @@ export default function Index() {
                 <Link to={'./home'} state={homePageData}>Home page</Link>
                 <Link to={'./accordion'}>Accordion page</Link>
                 <Link to={'./movies'}>Movies Page</Link>
+                <Link to={'./gallery'}>Image Gallery Page</Link>
+                <Link to={'./toaster'}>Toaster Page</Link>
             </div>
 
         </div>
