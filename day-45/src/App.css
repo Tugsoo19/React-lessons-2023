@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+
+nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.active {
+  background-color: aqua;
+}
