@@ -9,7 +9,7 @@ function renderElepasedString(elapsed, runningSince) {
 function millisecondstoHuman(ms) {
     const seconds = Math.floor((ms / 1000) % 60);
     const minutes = Math.floor((ms / 1000 / 60) % 60);
-    const hours = Math.floor(ms / 1000 / 60 / 60) % 60;
+    const hours = Math.floor(ms / 1000 / 60 / 60);
 
     console.log(seconds, minutes, hours);
     return [pad(hours.toString(), 2),
