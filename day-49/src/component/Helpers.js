@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid'
+
 function renderElepasedString(elapsed, runningSince) {
     let totalElapsed = elapsed;
     if (runningSince) {
@@ -25,4 +27,14 @@ function pad(numberString, size) {
     return padded;
 }
 
-export { renderElepasedString }
+function newTimer(attrs = {}) {
+    console.log(attrs);
+    return {
+        title: attrs.title || "Timer",
+        project: attrs.project || "Project",
+        id: uuidv4(), // eslint-disable-line no-undef
+        elapsed: 0,
+    }
+}
+
+export { renderElepasedString, newTimer }
