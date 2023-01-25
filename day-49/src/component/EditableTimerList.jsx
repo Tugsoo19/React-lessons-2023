@@ -1,4 +1,4 @@
-import EditableTimer from "./EditableTimer"
+import EditableTimer from "./EditableTimer";
 
 export default function EditableTimerList({ timers }) {
     const timerList = timers.map((timer, index) => (
@@ -7,13 +7,10 @@ export default function EditableTimerList({ timers }) {
             id={timer.id}
             title={timer.title}
             project={timer.project}
-            elapse={timer.elapsed}
+            elapsed={timer.elapsed}
             runningSince={timer.runningSince}
         />
     ));
-    return (
-        <div>
-            {timerList}
-        </div>
-    )
+
+    return <div>{timerList}</div>;
 }
