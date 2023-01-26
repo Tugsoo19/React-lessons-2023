@@ -1,0 +1,12 @@
+.App {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  background-color: antiquewhite;
+}
+
+#navbar a {
+  margin: 20px ;
+}
