@@ -1,6 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import InputForm from "./component/inputForm";
+import Updateform from "./component/UpdateForm";
 
 const GET_DATA_URL = "http://localhost:8080/data";
 const DELETE_DATA_URL = "http://localhost:8080/data";
@@ -13,7 +14,8 @@ function App() {
    */
   const [data, setData] = useState([]);
   const [isloading, setIsLoading] = useState(false);
-
+  const [isOpenForm, setIsOpenForm] = useState(false)
+  const [currentData, setCurrentData] = useState({})
   useEffect(() => {
     fetchData();
   }, []);
@@ -46,6 +48,13 @@ function App() {
     deleteData(data);
   }
 
+  function handleEdit(data) {
+    console.log(data);
+    setCurrentData(data)
+    setIsOpenForm(true)
+
+  }
+
   return (
     <div className="App">
       <h1>Day-51 - React/Express Fullstack APP - without Database</h1>
@@ -54,20 +63,27 @@ function App() {
         setIsLoading={setIsLoading}
         setData={setData}
       />
+      {isOpenForm ? <Updateform
+        setCurrentData={setCurrentData}
+        currentData={currentData}
+        setData={setData}
+      /> : <div></div>}
 
       {isloading
         ? "...Loading"
         : data &&
-          data.map((d, index) => {
-            return (
-              <div>
-                <p key={index}>
-                  {d.name} -- {d.major}
-                </p>
-                <button onClick={() => handleDelete(d.id)}>Delete</button>
-              </div>
-            );
-          })}
+        data.map((d, index) => {
+          return (
+            <div>
+              <p key={index}>
+                {d.name} -- {d.major}
+              </p>
+              <button onClick={() => handleDelete(d.id)}>Delete</button>
+
+              <button onClick={() => handleEdit(d)}>Edit</button>
+            </div>
+          );
+        })}
     </div>
   );
 }
