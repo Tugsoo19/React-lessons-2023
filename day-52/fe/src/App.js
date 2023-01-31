@@ -10,7 +10,6 @@ function App() {
     id: "",
     username: "",
     age: "",
-    test: "",
   });
 
   async function fetchAllData() {
@@ -28,6 +27,18 @@ function App() {
     e.preventDefault();
     if (isUpdate) {
       update();
+      // const putData = { 
+      //   id: currentUser.id,
+      //   username: currentUser.username,
+      //   age: currentUser.age,
+      // }
+      // const options = {
+      //   method: 'PUT',
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(putData),
+      // }
       console.log(isUpdate);
     } else {
       const postData = {
@@ -82,7 +93,6 @@ function App() {
       ...currentUser,
       username: e.target.value,
     });
-    console.log(setCurrentUser);
   }
 
   function handleAgeChange(e) {
@@ -93,10 +103,18 @@ function App() {
   }
 
   async function handleEdit(userId) {
+    console.log(userId);
     setIsUpdate(true);
-    const current = users.filter((user) => user.id === userId);
-    setCurrentUser(current);
-    console.log(setCurrentUser);
+    const filteredUser = users.filter((user) => user.id === userId)[0];
+    setCurrentUser(filteredUser);
+    //  if (filteredUser){
+    //   setCurrentUser({
+    //     id: filteredUser.id,
+    //     username: filteredUser.username,
+    //     age: filteredUser.age,
+    //   })
+    // }
+
   }
 
   return (
@@ -126,9 +144,9 @@ function App() {
       </form>
       <h3>Users List</h3>
       {users &&
-        users.map((user) => {
+        users.map((user, index) => {
           return (
-            <div>
+            <div key={index}>
               <p>
                 {user.username} : {user.age}{" "}
                 <button onClick={() => handleEdit(user.id)}>Edit</button>{" "}

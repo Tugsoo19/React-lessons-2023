@@ -112,6 +112,7 @@ app.put("/users", (request, response) => {
     if (readError) {
       response.json({
         status: "read file error",
+        data: [],
       });
     }
     const updatedData = savedData.map((d) => {
