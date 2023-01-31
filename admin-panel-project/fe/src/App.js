@@ -1,20 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-import { Routes, Route } from 'react-router-dom'
-import Users from './pages/User';
-import VerticalTabs from './component/SideBar';
-import SideBar from './component/SideBar';
+import logo from "./logo.svg";
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+
+import VerticalTabs from "./component/SideBar";
+import SideBar from "./component/SideBar";
+import Header from "./component/Header";
+import { Box } from "@mui/system";
+import UsersList from "./pages/UserPage/UserList";
+import AddUser from "./pages/UserPage/AddUser";
+// import RouterBreadcrumbs from "./component/test";
 
 function App() {
   return (
     <div className="App">
-      <h1>Admin Panel Project</h1>
-      <SideBar />
+      <Header />
+      {/* <RouterBreadcrumbs /> */}
+      <Box display="flex" gap={4}>
+        <SideBar />
 
-      <Routes>
-        <Route path='/users' element={<Users />} />
-
-      </Routes>
+        <Routes>
+          <Route path="/users" element={<UsersList />} />
+          <Route path="/users/add" element={<AddUser />} />
+        </Routes>
+      </Box>
     </div>
   );
 }
