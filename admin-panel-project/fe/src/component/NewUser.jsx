@@ -9,13 +9,18 @@ import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export default function NewUser() {
-
-  const URL = "http://localhost:8080/users/add"
+  const URL = "http://localhost:8080/users/add";
   const [users, setUsers] = useState([]);
-  const [value, setValue] = useState("User");
-
+  const [open, setOpen] = React.useState(false);
+  const [check, setCheck] = React.useState("No");
   // const [currentUser, setCurrentUser] = useState({
   //   id: "",
   //   firstname: "",
@@ -24,17 +29,21 @@ export default function NewUser() {
   //   email: "",
   //   password: "",
   // });
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
-
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-    console.log(value);
+    setOpen(false);
   };
 
+  const handleCheck = () => {
+    setCheck("Yes");
+  };
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(e)
+    console.log(e.target.isDisable.value);
+    setOpen(true);
 
     const postData = {
       id: e.target.id.value,
@@ -43,7 +52,8 @@ export default function NewUser() {
       phoneNumber: e.target.phoneNumber.value,
       email: e.target.email.value,
       password: e.target.password.value,
-      role: e.target.role.value
+      role: e.target.role.value,
+      isDisable: e.target.isDisable.value,
     };
 
     console.log(postData, "postData");
@@ -53,8 +63,8 @@ export default function NewUser() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(postData)
-    }
+      body: JSON.stringify(postData),
+    };
     const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
     console.log(FETCHED_JSON);
@@ -65,7 +75,7 @@ export default function NewUser() {
     <Box>
       <h2> Add Users</h2>
       <form onSubmit={handleSubmit}>
-        <Box >
+        <Box>
           <TextField
             sx={{ m: "10px 30px" }}
             fullWidth
@@ -106,15 +116,25 @@ export default function NewUser() {
             <FormLabel id="demo-radio-buttons-group-label">Role</FormLabel>
             <br />
             <RadioGroup row name="role">
-              <FormControlLabel value="Admin" control={<Radio />} label="Admin" />
+              <FormControlLabel
+                value="Admin"
+                control={<Radio />}
+                label="Admin"
+              />
               <FormControlLabel value="User" control={<Radio />} label="User" />
             </RadioGroup>
           </Box>
           <Box sx={{ m: "10px 30px" }}>
-            <FormLabel id="demo-radio-buttons-group-label" name="isDisable">Disabled</FormLabel>
+            <FormLabel id="demo-radio-buttons-group-label">Disabled</FormLabel>
             <br />
             <FormGroup>
-              <FormControlLabel control={<Checkbox />} sx={{ width: "10px" }} />
+              <FormControlLabel
+                control={<Checkbox />}
+                sx={{ width: "10px" }}
+                onClick={handleCheck}
+                value={check}
+                name="isDisable"
+              />
             </FormGroup>
           </Box>
           <Box sx={{ m: "10px 30px" }}>
@@ -134,7 +154,12 @@ export default function NewUser() {
           />
         </Box>
         <Box sx={{ m: "10px 30px" }}>
-          <Button type="submit" variant="contained" sx={{ mx: "10px" }}>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ mx: "10px" }}
+            onClick={handleClose}
+          >
             Save
           </Button>
           <Button variant="outlined" sx={{ mx: "10px" }}>
@@ -144,20 +169,12 @@ export default function NewUser() {
             Cancel
           </Button>
         </Box>
+        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+          <Alert severity="success" sx={{ width: "100%" }}>
+            New User successfully created!
+          </Alert>
+        </Snackbar>
       </form>
-      <h3>Users List</h3>
-      {users &&
-        users.map((user, index) => {
-          return (
-            <div key={index}>
-              <p>
-                {user.firstname} | {user.lastname}|{" "}
-                {user.phoneNumber} {" "}|
-                {user.email}
-              </p>
-            </div>
-          );
-        })}
     </Box>
   );
 }
