@@ -6,14 +6,14 @@ export default function UsersTable() {
     { field: "firstName", headerName: "First name", width: 130 },
     { field: "lastName", headerName: "Last name", width: 130 },
     {
-      field: "age",
-      headerName: "Age",
+      field: "phonenumber",
+      headerName: "Phone Number",
       type: "number",
-      width: 90,
+      width: 130,
     },
     {
-      field: "fullName",
-      headerName: "Full name",
+      field: "email",
+      headerName: "E-mail",
       description: "This column has a value getter and is not sortable.",
       sortable: false,
       width: 160,
@@ -34,11 +34,11 @@ export default function UsersTable() {
     { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
   ];
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: 800, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={5}
+        pageSize={10}
         rowsPerPageOptions={[5]}
         checkboxSelection
       />
