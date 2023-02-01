@@ -2,7 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 
 function App() {
-  const URL = "http://localhost:8080/users";
+  const URL = "http://localhost:8000/users/add";
 
   const [users, setUsers] = useState([]);
   const [isUpdate, setIsUpdate] = useState(false);
