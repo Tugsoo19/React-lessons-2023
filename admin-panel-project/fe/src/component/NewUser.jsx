@@ -25,14 +25,6 @@ export default function NewUser() {
   //   password: "",
   // });
 
-  async function fetchAllData() {
-    const FETCHED_DATA = await fetch(URL)
-    const FETCHED_JSON = await FETCHED_DATA.json()
-    setUsers(FETCHED_JSON.data)
-  }
-  useEffect(() => {
-    fetchAllData();
-  }, []);
 
 
   const handleChange = (event) => {
