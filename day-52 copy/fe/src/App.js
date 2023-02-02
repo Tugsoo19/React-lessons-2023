@@ -1,51 +1,92 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-// import { updateUser, createUser } from "./services/usersServices"
-import { fetchAllData, deleteUser, updateUser, createUser } from './services/axiosUsersServices'
+
 function App() {
-  const URL = "http://localhost:8000/users";
+  const URL = "http://localhost:8000/users/add";
 
   const [users, setUsers] = useState([]);
   const [isUpdate, setIsUpdate] = useState(false);
-  const newUser = ({
+  const [currentUser, setCurrentUser] = useState({
     id: "",
     username: "",
     age: "",
   });
 
-  const [currentUser, setCurrentUser] = useState(newUser)
+  async function fetchAllData() {
+    // fetch a data from localhost:8080/users
+    const FETCHED_DATA = await fetch(URL); // response
+    const FETCHED_JSON = await FETCHED_DATA.json(); // {status: 'success', data:[{id:...}]}
+    setUsers(FETCHED_JSON.data);
+  }
 
   useEffect(() => {
-    fetchAllData(URL, setUsers);
+    fetchAllData();
   }, []);
-
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!isUpdate) {
-      createUser(e, URL, setUsers)
+    if (isUpdate) {
+      update();
+      // const putData = { 
+      //   id: currentUser.id,
+      //   username: currentUser.username,
+      //   age: currentUser.age,
+      // }
+      // const options = {
+      //   method: 'PUT',
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(putData),
+      // }
+      console.log(isUpdate);
     } else {
-      updateUser(currentUser, URL, setUsers, setIsUpdate, setCurrentUser, newUser)
+      const postData = {
+        username: e.target.username.value,
+        age: e.target.age.value,
+      };
+
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      };
+
+      const FETCHED_DATA = await fetch(URL, options);
+      const FETCHED_JSON = await FETCHED_DATA.json();
+      console.log(FETCHED_JSON);
+      setUsers(FETCHED_JSON.data);
     }
   }
 
   async function handleDelete(userId) {
-    deleteUser(userId, URL, setUsers)
-
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId,
+      }),
+    };
+    const FETCHED_DATA = await fetch(URL, options);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    setUsers(FETCHED_JSON.data);
   }
-
-  // async function update() {
-  //   const options = {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(currentUser),
-  //   };
-  //   const FETCHED_DATA = await fetch(URL, options);
-  //   const FETCHED_JSON = await FETCHED_DATA.json();
-  //   setUsers(FETCHED_JSON.data);
-  // }
+  async function update() {
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(currentUser),
+    };
+    const FETCHED_DATA = await fetch(URL, options);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    setUsers(FETCHED_JSON.data);
+  }
 
   function handleNameChange(e) {
     setCurrentUser({
@@ -117,6 +158,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
