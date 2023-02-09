@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { Navigate } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -21,6 +22,7 @@ export default function NewUser() {
   const [users, setUsers] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [check, setCheck] = React.useState("No");
+  const [formSubmitted, setFormSubmitted] = useState(false);
   // const [currentUser, setCurrentUser] = useState({
   //   id: "",
   //   firstname: "",
@@ -29,13 +31,16 @@ export default function NewUser() {
   //   email: "",
   //   password: "",
   // });
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+  // const handleClose = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setOpen(false);
+  // };
 
-    setOpen(false);
-  };
+  if (formSubmitted) {
+    return <Navigate to={"/users"} />;
+  }
 
   const handleCheck = () => {
     setCheck("Yes");
@@ -44,6 +49,7 @@ export default function NewUser() {
     e.preventDefault();
     console.log(e.target.isDisable.value);
     setOpen(true);
+    setFormSubmitted(true);
 
     const postData = {
       id: e.target.id.value,
@@ -158,7 +164,7 @@ export default function NewUser() {
             type="submit"
             variant="contained"
             sx={{ mx: "10px" }}
-            onClick={handleClose}
+            // onClick={handleClose}
           >
             Save
           </Button>
@@ -169,7 +175,7 @@ export default function NewUser() {
             Cancel
           </Button>
         </Box>
-        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Snackbar open={open} autoHideDuration={3000}>
           <Alert severity="success" sx={{ width: "100%" }}>
             New User successfully created!
           </Alert>
