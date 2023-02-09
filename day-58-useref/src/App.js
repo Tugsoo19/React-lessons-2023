@@ -4,6 +4,8 @@ import { useContext, useState } from 'react';
 import List from './component/List';
 import { ImageContext } from './context/ImageContext';
 import Stopwatch from './component/Stopwatch';
+import InputFocus from './component/InputFocus';
+import VideoPlayer from './component/VideoPlayer';
 
 function App() {
   const [isLarge, setIsLarge, imageSize] = useContext(ImageContext)
@@ -21,6 +23,9 @@ function App() {
       <List /> */}
 
       <Stopwatch />
+      <InputFocus />
+      <br />
+      <VideoPlayer />
     </div>
   );
 }
