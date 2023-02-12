@@ -8,6 +8,8 @@ import Header from "./component/Header";
 import { Box } from "@mui/system";
 import UsersList from "./pages/UserPage/UserList";
 import AddUser from "./pages/UserPage/AddUser";
+import ProductList from "./pages/ProductPage/ProductList";
+import AddProduct from "./pages/ProductPage/AddProduct";
 // import RouterBreadcrumbs from "./component/test";
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
         <Routes>
           <Route path="/users" element={<UsersList />} />
           <Route path="/users/add" element={<AddUser />} />
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/products/add" element={<AddProduct />} />
         </Routes>
       </Box>
     </div>

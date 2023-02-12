@@ -52,18 +52,30 @@ export default function SideBar() {
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <ul>
-              <ListItemButton>
-                {" "}
-                <li>Product Manage</li>
-              </ListItemButton>
+              <List
+                to="/products"
+                className={activeIndex === 0 ? "active" : ""}
+                onClick={() => setActiveIndex(0)}
+              >
+                <ListItemButton>
+                  {" "}
+                  <li>Product Manage</li>
+                </ListItemButton>
+              </List>
               <ListItemButton>
                 {" "}
                 <li>Products Grid</li>
               </ListItemButton>
-              <ListItemButton>
-                {" "}
-                <li>Product Page</li>
-              </ListItemButton>
+              <Link
+                to="/products"
+                className={activeIndex === 1 ? "active" : ""}
+                onClick={() => setActiveIndex(1)}
+              >
+                <ListItemButton>
+                  {" "}
+                  <li>Product Page</li>
+                </ListItemButton>
+              </Link>
             </ul>
           </Collapse>
           <ListItemButton onClick={handleClick}>
