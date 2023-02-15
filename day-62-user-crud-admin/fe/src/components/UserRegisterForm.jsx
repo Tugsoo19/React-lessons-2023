@@ -5,8 +5,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function UserRegisterForm() {
-    const URL = 'http://localhost:8080/register'
-    const ROLE_URL = 'http://localhost:8080/users/roles'
+    const URL = 'http://localhost:8181/register'
+    const ROLE_URL = 'http://localhost:8181/users/roles'
 
     const [roles, setRoles] = useState([])
     const [currentRole, setCurrentRole] = useState(0)
@@ -28,6 +28,7 @@ export default function UserRegisterForm() {
     }
 
     const navigate = useNavigate()
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 

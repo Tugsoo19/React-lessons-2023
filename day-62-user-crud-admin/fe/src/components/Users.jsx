@@ -5,7 +5,7 @@ import { useState } from "react"
 export default function Users() {
 
     const [users, setUsers] = useState([])
-    const URL = 'http://localhost:8080/users'
+    const URL = 'http://localhost:8181/users'
 
     async function fetchUsers() {
         const FETCHED_DATA = await fetch(URL)

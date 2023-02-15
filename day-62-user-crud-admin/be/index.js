@@ -3,11 +3,14 @@ console.log('Day-62 - User Login CRUD');
 const express = require('express')
 const cors = require('cors')
 const fs = require('fs');
+const { response } = require('express');
+const bcrypt = require('bcrypt')
 
 
 
 const app = express()
-const PORT = 8080
+const PORT = 8181
+const SALT_ROUNDS = 10
 
 app.use(cors())
 app.use(express.json())
@@ -38,34 +41,115 @@ app.post('/register', (request, response) => {
             }
             const roleData = JSON.parse(readData)
             const roleName = roleData.filter(role => role.id === body.role)[0]
-            const userData = {
-                ...body,
-                role: roleName
-            }
 
-            dataObject.push(userData)
+            const userPassword = body.password;
 
-            fs.writeFile(
-                "./data/users.json",
-                JSON.stringify(dataObject),
-                (writeError) => {
-                    if (writeError) {
-                        response.json({
-                            status: "write file error",
-                            data: [],
-                        })
-                    }
+            bcrypt.genSalt(SALT_ROUNDS, (err, salt) => {
+                if (err) {
                     response.json({
-                        status: 'success',
-                        data: dataObject
+                        status: 'generating salt error',
                     })
                 }
-            )
+
+                bcrypt.hash(userPassword, salt, (hashError, hashData) => {
+                    if (hashError) {
+                        response.json({
+                            status: 'hashing has error',
+                            data: []
+                        })
+                    }
+                    console.log('Hashed Data:', hashData);
+
+                    const newUser = {
+                        firstname: body.firstname,
+                        lastname: body.lastname,
+                        email: body.email,
+                        password: hashData,
+                        address: body.address,
+                        role: roleName
+                    }
+
+                    dataObject.push(newUser)
+
+                    fs.writeFile(
+                        "./data/users.json",
+                        JSON.stringify(dataObject),
+                        (writeError) => {
+                            if (writeError) {
+                                response.json({
+                                    status: "write file error",
+                                    data: [],
+                                })
+                            }
+                            response.json({
+                                status: 'success',
+                                data: dataObject
+                            })
+                        }
+                    )
+
+                });
+            })
+
+
         })
 
 
     })
 })
+
+// API user login
+
+app.post('/login', (request, response) => {
+    const body = request.body
+    console.log(body);
+
+    fs.readFile('./data/users.json', 'utf-8', (readError, readData) => {
+        if (readError) {
+            response.json({
+                status: 'file not found',
+                data: []
+            })
+        }
+
+        const usersArrayObject = JSON.parse(readData)
+
+        const foundUser = usersArrayObject.filter(user => body.email === user.email);
+
+        if (foundUser.length === 0) {
+            response.json({
+                status: 'User not found',
+                data: []
+            })
+        } else {
+            const foundUserObj = foundUser[0]
+            console.log(foundUserObj);
+
+
+            if (foundUserObj.password !== body.password) {
+                response.json({
+                    status: 'Username or Password do not match!',
+                })
+            } else {
+
+
+                response.json({
+                    status: "success",
+                    data: {
+                        email: foundUserObj.email,
+                        firstName: foundUserObj.firstname,
+                        lastName: foundUserObj.lastName,
+                    },
+                })
+            }
+
+        }
+
+    })
+
+
+})
+
 
 // API get all users
 
