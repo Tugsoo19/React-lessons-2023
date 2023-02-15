@@ -1,51 +1,24 @@
 [
     {
-        "firstname": "fghf",
-        "lastname": "fgh",
+        "firstname": "tugsoo",
+        "lastname": "dfg",
         "email": "tugsoo@gmail.com",
-        "password": "asd",
-        "address": "fgh",
-        "role": 3
+        "password": "$2b$10$fRkhOcIQGh2W.4gaP2/g4OqUT2TNTNAaqDYEcZjR2CWW8aO/CQ6qm",
+        "address": "fghfggfh",
+        "role": {
+            "id": 3,
+            "name": "Customer"
+        }
     },
     {
         "firstname": "dfg",
-        "lastname": "fgh",
-        "email": "ghf",
-        "password": "fgh",
-        "address": "fgh",
-        "role": "Admin"
-    },
-    {
-        "firstname": "fghfg",
-        "lastname": "fghfgh",
-        "email": "fgh",
-        "password": "fgh",
-        "address": "fgh",
-        "role": {
-            "id": 3,
-            "name": "Customer"
-        }
-    },
-    {
-        "firstname": "djhfgfh",
-        "lastname": "fjghfj",
-        "email": "ggfhj@jdhf.ih",
-        "password": "dfgd",
-        "address": "dfgdfg",
+        "lastname": "dfg",
+        "email": "qwe@g.com",
+        "password": "$2b$10$OaKz3pjwSXPIPsBdhnZrJejamABZuwLNX/BS9Zy9shlmkzYsrdNYW",
+        "address": "sdfgdg",
         "role": {
             "id": 2,
             "name": "User"
-        }
-    },
-    {
-        "firstname": "fhrtfy",
-        "lastname": "rty",
-        "email": "fgfgh@dfg.dfg",
-        "password": "$2b$10$AstJQ0e6YxKkH/PCp9AVLOcIUghpwk8W/W.T2iFdHJZyhDr/SGpry",
-        "address": "dfg",
-        "role": {
-            "id": 3,
-            "name": "Customer"
         }
     }
 ]
