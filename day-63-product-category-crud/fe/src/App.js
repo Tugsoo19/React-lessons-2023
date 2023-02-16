@@ -3,6 +3,8 @@ import './App.css';
 import { Route, Routes } from "react-router-dom"
 import CategoryForm from './components/CategoryForm';
 import Categories from './components/Categories';
+import { ToastContainer } from 'react-toastify';
+import CategoryEditForm from './components/CategoryEditForm';
 
 
 function App() {
@@ -12,9 +14,10 @@ function App() {
       <Routes>
         <Route path='/category/add' element={<CategoryForm />} />
         <Route path='/category/list' element={<Categories />} />
-        <Route path='/category/edit/:id' element={null} />
-        <Route path='/category/delete/:id' element={null} />
+        <Route path='/category/edit/:id' element={<CategoryEditForm />} />
+
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
