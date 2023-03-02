@@ -1,0 +1,37 @@
+GET http://localhost:8181/employees HTTP/1.1
+Content-Type: application/json
+
+###
+
+POST  http://localhost:8181/employee HTTP/1.1
+Content-Type: application/json
+
+{
+    "birthDate":"1990-01-01",
+    "firstName": "Tugsoo",
+    "lastName": "McKey",
+    "gender": "F", 
+    "hireDate":"2011-04-03"
+}
+
+###
+
+DELETE http://localhost:8181/employee HTTP/1.1
+Content-Type: application/json
+
+{
+    "empNo" : 500005
+}
+
+###
+
+PUT http://localhost:8181/employee HTTP/1.1
+Content-Type: application/json
+
+{
+    "empNo": 500004,
+    "lastName": "Mend",
+    "gender" : "F"
+}
+
+###
