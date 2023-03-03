@@ -12,6 +12,10 @@ import { useState, useEffect } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { Navigate } from "react-router-dom";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -19,9 +23,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function NewProduct() {
   const URL = "http://localhost:8080/products/add";
-  const [users, setUsers] = useState([]);
+  const [products, setProducts] = useState([]);
   const [open, setOpen] = React.useState(false);
-  const [check, setCheck] = React.useState("No");
   const [formSubmitted, setFormSubmitted] = useState(false);
   // const [currentUser, setCurrentUser] = useState({
   //   id: "",
@@ -38,28 +41,34 @@ export default function NewProduct() {
   //   setOpen(false);
   // };
 
+  const [img, setImg] = React.useState('');
+
+  const handleChange = (event) => {
+    setImg(event.target.value);
+  };
+
   if (formSubmitted) {
     return <Navigate to={"/products"} />;
   }
 
-  const handleCheck = () => {
-    setCheck("Yes");
-  };
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(e.target.isDisable.value);
     setOpen(true);
     setFormSubmitted(true);
 
     const postData = {
       id: e.target.id.value,
-      firstname: e.target.firstname.value,
-      lastname: e.target.lastname.value,
-      phoneNumber: e.target.phoneNumber.value,
-      email: e.target.email.value,
-      password: e.target.password.value,
-      role: e.target.role.value,
-      isDisable: e.target.isDisable.value,
+      img: e.target.img.value,
+      title: e.target.title.value,
+      subtitle: e.target.subtitle.value,
+      price: e.target.price.value,
+      discount: e.target.discount.value,
+      desc1: e.target.desc1.value,
+      desc2: e.target.desc2.value,
+      code: e.target.code.value,
+      hashtag: e.target.hashtag.value,
+      technology: e.target.technology.value,
+      rating: e.target.rating.value,
     };
 
     console.log(postData, "postData");
@@ -74,7 +83,7 @@ export default function NewProduct() {
     const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
     console.log(FETCHED_JSON);
-    setUsers(FETCHED_JSON.data);
+    setProducts(FETCHED_JSON.data);
   }
 
   return (
@@ -82,20 +91,34 @@ export default function NewProduct() {
       <h2> New product</h2>
       <form onSubmit={handleSubmit}>
         <Box>
-          <FormLabel>
-            Title
-            <Input
-              sx={{ m: "10px 30px" }}
-              name="title"
-              variant="outlined"
-              width="auto"
-            />
-          </FormLabel>
+          <FormControl sx={{ m: "10px 30px", width: "500px" }}>
+            <InputLabel id="demo-simple-select-label">Image</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={img}
+              label="Image"
+              name="img"
+              onChange={handleChange}
+            >
+              <MenuItem value={'img1'}>img1</MenuItem>
+              <MenuItem value={'img2'}>img2</MenuItem>
+              <MenuItem value={'img3'}>img3</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            sx={{ m: "10px 30px", width: "600px" }}
+            id="outlined-basic"
+            label="Title"
+            variant="outlined"
+            name="title"
+          />
+          <br />
 
           <br />
           <TextField
-            sx={{ m: "10px 30px" }}
-            fullWidth
+            sx={{ m: "10px 30px", width: "600px" }}
+
             id="outlined-basic"
             label="Subtitle"
             variant="outlined"
@@ -103,80 +126,96 @@ export default function NewProduct() {
           />
           <br />
           <TextField
-            sx={{ m: "10px 30px" }}
-            fullWidth
+            sx={{ m: "10px 30px", width: "600px" }}
+
             id="outlined-basic"
             label="Price"
             variant="outlined"
             name="price"
           />
           <br />
+
           <TextField
-            sx={{ m: "10px 30px" }}
-            fullWidth
+            sx={{ m: "10px 30px", width: "600px" }}
+
             id="outlined-basic"
-            label="E-Mail"
+            label="Discount"
             variant="outlined"
-            name="email"
+            name="discount"
           />
           <br />
-          <Box sx={{ m: "10px 30px" }}>
-            <FormLabel id="demo-radio-buttons-group-label">Role</FormLabel>
-            <br />
-            <RadioGroup row name="role">
-              <FormControlLabel
-                value="Admin"
-                control={<Radio />}
-                label="Admin"
-              />
-              <FormControlLabel value="User" control={<Radio />} label="User" />
-            </RadioGroup>
-          </Box>
-          <Box sx={{ m: "10px 30px" }}>
-            <FormLabel id="demo-radio-buttons-group-label">Disabled</FormLabel>
-            <br />
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox />}
-                sx={{ width: "10px" }}
-                onClick={handleCheck}
-                value={check}
-                name="isDisable"
-              />
-            </FormGroup>
-          </Box>
-          <Box sx={{ m: "10px 30px" }}>
-            <h4>Avatar</h4>
-            <Button variant="contained" component="label">
-              Upload an image
-              <input hidden accept="image/*" multiple type="file" />
-            </Button>
-          </Box>
           <TextField
-            sx={{ m: "10px 30px" }}
-            fullWidth
+            sx={{ m: "10px 30px", width: "600px" }}
+
             id="outlined-basic"
-            label="Password"
+            label="Description 1"
             variant="outlined"
-            name="password"
+            name="desc1"
           />
+          <br />
+          <TextField
+            sx={{ m: "10px 30px", width: "600px" }}
+
+            id="outlined-basic"
+            label="Description 2"
+            variant="outlined"
+            name="desc2"
+          />
+          <br />
+          <TextField
+            sx={{ m: "10px 30px", width: "600px" }}
+
+            id="outlined-basic"
+            label="Code"
+            variant="outlined"
+            name="code"
+          />
+          <br />
+          <TextField
+            sx={{ m: "10px 30px", width: "600px" }}
+
+            id="outlined-basic"
+            label="Hashtag"
+            variant="outlined"
+            name="hashtag"
+          />
+          <br />
+          <TextField
+            sx={{ m: "10px 30px", width: "600px" }}
+
+            id="outlined-basic"
+            label="Technology"
+            variant="outlined"
+            name="technology"
+          />
+          <br />
+          <TextField
+            sx={{ m: "10px 30px", width: "600px" }}
+
+            id="outlined-basic"
+            label="Rating"
+            variant="outlined"
+            name="rating"
+          />
+          <br />
+
         </Box>
         <Box sx={{ m: "10px 30px" }}>
           <Button
             type="submit"
             variant="contained"
             sx={{ mx: "10px" }}
-            // onClick={handleClose}
+          // onClick={handleClose}
           >
             Save
           </Button>
           <Button variant="outlined" sx={{ mx: "10px" }}>
-            Cancel
+            Back
           </Button>
         </Box>
         <Snackbar open={open} autoHideDuration={3000}>
           <Alert severity="success" sx={{ width: "100%" }}>
-            New User successfully created!
+            New Product successfully created!
           </Alert>
         </Snackbar>
       </form>

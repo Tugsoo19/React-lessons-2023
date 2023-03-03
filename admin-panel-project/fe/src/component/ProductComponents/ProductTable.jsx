@@ -13,12 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 export default function ProductTable() {
   const URL = "http://localhost:8080/products/add";
 
-  const [users, setUsers] = useState([]);
-  const [open, setOpen] = useState(true);
+  const [products, setProducts] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
-  // const handleClick = () => {
-  //   setOpen(!open);
-  // };
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -30,14 +26,14 @@ export default function ProductTable() {
   async function fetchAllData() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
+    setProducts(FETCHED_JSON.data);
   }
   useEffect(() => {
     fetchAllData();
   }, []);
 
   async function handleDelete(id) {
-    toast("User is deleted!");
+    toast("Product is deleted!");
     const options = {
       method: "DELETE",
       headers: {
@@ -49,74 +45,45 @@ export default function ProductTable() {
     };
     const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
+    setProducts(FETCHED_JSON.data);
   }
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
-    { field: "firstname", headerName: "First name", width: 130 },
-    { field: "lastname", headerName: "Last name", width: 130 },
+    { field: "img", headerName: "Image", width: 130 },
+    { field: "title", headerName: "Title", width: 130 },
     {
-      field: "phoneNumber",
-      headerName: "Phone Number",
-      type: "number",
-      width: 130,
+      field: "subtitle",
+      headerName: "Subtitle",
+      type: "text",
+      width: 200,
     },
     {
-      field: "email",
-      headerName: "E-mail",
+      field: "price",
+      headerName: "Price",
       description: "This column has a value getter and is not sortable.",
-      sortable: false,
+      sortable: true,
       width: 160,
+      type: "text"
     },
     {
-      field: "role",
-      headerName: "Role",
+      field: "rating",
+      headerName: "Rating",
       description: "This column has a value getter and is not sortable.",
       sortable: false,
-      width: 100,
+      width: 150,
     },
-    {
-      field: "isDisable",
-      headerName: "Disable",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 100,
-    },
+
     {
       field: "action",
       headerName: "Action",
       sortable: false,
-      width: 80,
+      width: 200,
       renderCell: (params) => {
         return (
           <Box>
-            <MoreVertIcon
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-            />
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorEl)}
-            >
-              <MenuItem onClick={handleClose}>Edit</MenuItem>
-              <MenuItem onClick={() => handleDelete(params.row.id)}>
-                Delete
-              </MenuItem>
-              <ToastContainer />
-            </Menu>
+            <Button variant="outlined" color="success" sx={{ m: "5px" }}>Edit</Button>
+            <Button variant="outlined" color="error" sx={{ m: "5px" }}>Delete</Button>
           </Box>
         );
       },
@@ -134,9 +101,9 @@ export default function ProductTable() {
       <br />
       <br />
       <DataGrid
-        rows={users}
+        rows={products}
         columns={columns}
-        pageSize={6}
+        pageSize={10}
         rowsPerPageOptions={[5]}
         checkboxSelection
       />
