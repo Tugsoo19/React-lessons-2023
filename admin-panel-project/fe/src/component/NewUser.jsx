@@ -52,13 +52,13 @@ export default function NewUser() {
     setFormSubmitted(true);
 
     const postData = {
-      id: e.target.id.value,
-      firstname: e.target.firstname.value,
-      lastname: e.target.lastname.value,
+      user_id: e.target.id.value,
+      firstName: e.target.firstname.value,
+      lastName: e.target.lastname.value,
       phoneNumber: e.target.phoneNumber.value,
       email: e.target.email.value,
       password: e.target.password.value,
-      role: e.target.role.value,
+      userRole: e.target.role.value,
       isDisable: e.target.isDisable.value,
     };
 
@@ -74,7 +74,7 @@ export default function NewUser() {
     const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
     console.log(FETCHED_JSON);
-    setUsers(FETCHED_JSON.data);
+    setUsers(FETCHED_JSON);
   }
 
   return (
@@ -123,11 +123,14 @@ export default function NewUser() {
             <br />
             <RadioGroup row name="role">
               <FormControlLabel
-                value="Admin"
+                value="1"
                 control={<Radio />}
                 label="Admin"
               />
-              <FormControlLabel value="User" control={<Radio />} label="User" />
+              <FormControlLabel
+                value="2"
+                control={<Radio />}
+                label="User" />
             </RadioGroup>
           </Box>
           <Box sx={{ m: "10px 30px" }}>

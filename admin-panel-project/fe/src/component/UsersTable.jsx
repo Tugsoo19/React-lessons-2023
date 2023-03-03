@@ -30,7 +30,7 @@ export default function UsersTable() {
   async function fetchAllData() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
+    setUsers(FETCHED_JSON);
   }
   useEffect(() => {
     fetchAllData();
@@ -49,15 +49,15 @@ export default function UsersTable() {
     };
     const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
+    setUsers(FETCHED_JSON);
   }
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
-    { field: "firstname", headerName: "First name", width: 130 },
-    { field: "lastname", headerName: "Last name", width: 130 },
+    { field: "first_name", headerName: "First name", width: 130 },
+    { field: "last_name", headerName: "Last name", width: 130 },
     {
-      field: "phoneNumber",
+      field: "phone_number",
       headerName: "Phone Number",
       type: "number",
       width: 130,
@@ -70,7 +70,7 @@ export default function UsersTable() {
       width: 160,
     },
     {
-      field: "role",
+      field: "user_role_id",
       headerName: "Role",
       description: "This column has a value getter and is not sortable.",
       sortable: false,
@@ -136,7 +136,7 @@ export default function UsersTable() {
       <DataGrid
         rows={users}
         columns={columns}
-        pageSize={6}
+        pageSize={15}
         rowsPerPageOptions={[5]}
         checkboxSelection
       />
