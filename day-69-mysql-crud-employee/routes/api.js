@@ -3,6 +3,7 @@ import express from 'express';
 const api_router = express.Router();
 import { getPopularCategories } from '../services/category-services.js';
 import { getChildrenMenus, getParentMenus } from '../services/menu-services.js';
+import { getAllProducts, search } from '../services/product_services.js';
 
 
 // emp_router.put("/employee", async (request, response) => {
@@ -44,6 +45,24 @@ import { getChildrenMenus, getParentMenus } from '../services/menu-services.js';
 
 api_router.get('/popular', async (request, response) => {
     const result = await getPopularCategories()
+    console.log(result);
+
+    response.status(200).send(result)
+
+});
+
+api_router.get('/products', async (request, response) => {
+
+    const result = await getAllProducts()
+    console.log(result);
+
+    response.status(200).send(result)
+
+});
+
+api_router.get('/search', async (request, response) => {
+    const keyword = request.query.keyword;
+    const result = await search(keyword)
     console.log(result);
 
     response.status(200).send(result)
