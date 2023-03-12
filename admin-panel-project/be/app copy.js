@@ -1,4 +1,4 @@
-import express from 'express'
+import express from "express";
 
 console.log("it's my app.js");
 
@@ -7,16 +7,10 @@ const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
 
-
 /// configuration of modules
 
 const app = express();
 const PORT = 8080;
-
-app.use(cors());
-app.use(express.json());
-
-app.use()
 
 app.get("/users/add", (request, response) => {
   fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
@@ -166,7 +160,7 @@ app.get("/products/add", (request, response) => {
     if (readError) {
       response.json({
         status: "file reader error",
-        data: []
+        data: [],
       });
     }
 
@@ -175,9 +169,9 @@ app.get("/products/add", (request, response) => {
     response.json({
       status: "success",
       data: objectData,
-    })
-  })
-})
+    });
+  });
+});
 
 app.post("/products/add", (request, response) => {
   const body = request.body;
@@ -234,7 +228,6 @@ app.post("/products/add", (request, response) => {
     );
   });
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server is runngin on http://localhost:${PORT}`);

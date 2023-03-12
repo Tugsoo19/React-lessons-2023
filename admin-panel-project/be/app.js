@@ -1,20 +1,23 @@
 import express from "express";
-import cors from "cors";
-import user_router from "./routes/users.js";
+// import cors from "cors";
+// import user_router from "./routes/users.js";
 
 console.log("it's my app.js");
 
 // import necessary module
+// const express = require("express");
+// const cors = require("cors");
+const fs = require("fs");
 
 /// configuration of modules
 
 const app = express();
 const PORT = 8080;
 
-app.use(cors());
-app.use(express.json());
+// app.use(cors());
+// app.use(express.json());
 
-app.use(user_router);
+// app.use(user_router);
 
 app.get("/products/add", (request, response) => {
   fs.readFile("./public/data/products.json", "utf-8", (readError, readData) => {
