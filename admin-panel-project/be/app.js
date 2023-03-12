@@ -1,12 +1,10 @@
-import express from 'express'
-import cors from 'cors'
-import user_router from './routes/users.js';
-
+import express from "express";
+import cors from "cors";
+import user_router from "./routes/users.js";
 
 console.log("it's my app.js");
 
 // import necessary module
-
 
 /// configuration of modules
 
@@ -16,89 +14,14 @@ const PORT = 8080;
 app.use(cors());
 app.use(express.json());
 
-app.use(user_router)
-
-
-
-app.delete("/users/add", (request, response) => {
-  const body = request.body;
-
-  fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
-    if (readError) {
-      response.json({
-        status: "file reader error",
-        data: [],
-      });
-    }
-    const dataObject = JSON.parse(readData);
-    const filteredObjects = dataObject.filter((e) => e.id !== body.id);
-
-    fs.writeFile(
-      "./public/data/users.json",
-      JSON.stringify(filteredObjects),
-      (writeError) => {
-        if (writeError) {
-          response.json({
-            status: "Error during file write",
-            data: [],
-          });
-        }
-        response.json({
-          status: "success",
-          data: filteredObjects,
-        });
-      }
-    );
-  });
-});
-
-app.put("/users", (request, response) => {
-  const body = request.body;
-  fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
-    const savedData = JSON.parse(readData);
-    if (readError) {
-      response.json({
-        status: "read file error",
-        data: [],
-      });
-    }
-    const updatedData = savedData.map((d) => {
-      if (d.id === body.id) {
-        (d.firstname = body.firstname),
-          (d.lastname = body.lastname),
-          (d.phoneNumber = body.phoneNumber),
-          (d.email = body.email),
-          (d.password = body.password),
-          (d.role = body.role),
-          (d.isDisable = body.isDisable);
-      }
-      return d;
-    });
-    fs.writeFile(
-      "./data/users.json",
-      JSON.stringify(updatedData),
-      (writeError) => {
-        if (writeError) {
-          response.json({
-            status: "error during the file write",
-            data: [],
-          });
-        }
-        response.json({
-          status: "success",
-          data: updatedData,
-        });
-      }
-    );
-  });
-});
+app.use(user_router);
 
 app.get("/products/add", (request, response) => {
   fs.readFile("./public/data/products.json", "utf-8", (readError, readData) => {
     if (readError) {
       response.json({
         status: "file reader error",
-        data: []
+        data: [],
       });
     }
 
@@ -107,9 +30,9 @@ app.get("/products/add", (request, response) => {
     response.json({
       status: "success",
       data: objectData,
-    })
-  })
-})
+    });
+  });
+});
 
 app.post("/products/add", (request, response) => {
   const body = request.body;
@@ -166,7 +89,6 @@ app.post("/products/add", (request, response) => {
     );
   });
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server is runngin on http://localhost:${PORT}`);
