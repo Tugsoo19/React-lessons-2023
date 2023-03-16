@@ -7,9 +7,10 @@ POST http://localhost:8181/user HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Otgoo",
-    "email": "g.otgonmunkh@gmail.com",
-    "createdOn": "2010-02-02"
+    "name": "tugs",
+    "email": "tugs2@gmail.com",
+    "createdOn": "2010-02-02",
+    "lastLogin": "2010-12-12"
 
 }
 
@@ -22,5 +23,25 @@ Content-Type: application/json
     "id": "641144284a9dae0264043a9b"
 
 }
+
+###
+
+GET http://localhost:8181/user?id=6412780e55885c97fd760ec0 HTTP/1.1
+Content-Type: :application/json
+
+###
+
+GET http://localhost:8181/userbyEmail?email=tugs2@gmail.com HTTP/1.1
+Content-Type: :application/json
+
+###
+
+GET http://localhost:8181/userGetEmail?email=tugs2@gmail.com HTTP/1.1
+Content-Type: :application/json
+
+###
+
+PUT http://localhost:8181/updateOneUser?id=6412780e55885c97fd760ec0 HTTP/1.1
+Content-Type: :application/json
 
 ###
