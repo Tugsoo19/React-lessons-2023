@@ -1,0 +1,37 @@
+POST http://localhost:8181/category/create HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Washing"
+}
+
+
+###
+
+PUT http://localhost:8181/update HTTP/1.1
+Content-Type: application/json
+
+[
+    {
+        "checked": true
+    },
+    {
+        "name": "Bathing Kids"
+    }
+
+]
+
+###
+
+GET http://localhost:8181/list HTTP/1.1
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:8181/category/delete HTTP/1.1
+Content-Type: application/json
+
+{"checked": true}
+
+
+###
