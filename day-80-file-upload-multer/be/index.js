@@ -2,8 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const multer = require("multer")
 const fs = require('fs')
-const { log } = require('console')
-const { response } = require('express')
+
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -18,10 +17,10 @@ const app = express()
 const PORT = 8181
 const upload = multer({ storage: storage })
 
-app.use(express.json())
-app.use(cors())
 app.use('/uploads', express.static("uploads"));  // URL-r tuhain file-aa nereer ni avah
 
+app.use(express.json())
+app.use(cors())
 
 app.get("/files", async (request, response) => {
     const testFolder = "./uploads/"
@@ -46,9 +45,9 @@ app.get('/', (request, response) => {
 app.post('/fileUpload', upload.single("image"), (request, response, next) => {
     // console.log(request.file);
     const imgs = []
-    fs.readdirSync("./uploads").forEach((file) => {
+    fs.readdirSync("./uploads/").forEach((file) => {
         console.log(file);
-        const fileURL = `http://localhost:8181/uploads${file}`
+        const fileURL = `http://localhost:8181/uploads/${file}`
         imgs.push(fileURL)
     })
     response.json({

@@ -56,13 +56,11 @@ export default function FileUpload() {
                 onSubmit={handleFileUpload}>
                 <input type="file" name="image" multiple />
                 <button type="submit">Submit</button>
-                {imageURLs.map((img) => (<img src={img} alt="img" />
-                ))}
-
-
-
 
             </form>
+            {imageURLs.map((img) => (
+                <img src={img} alt="img" />
+            ))}
         </div>
 
     )
