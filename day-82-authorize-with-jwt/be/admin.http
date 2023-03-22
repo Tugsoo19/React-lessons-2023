@@ -1,0 +1,19 @@
+POST http://localhost:8181/adminApi/register HTTP/1.1
+Content-Type:  application/json
+
+{
+    "email": "tugs@gmail.com",
+    "password": "12345"
+
+}
+
+
+###
+
+POST http://localhost:8181/adminApi/login HTTP/1.1
+Content-Type:  application/json
+
+{
+    "email": "tugs@gmail.com",
+    "password": "12345"
+}
