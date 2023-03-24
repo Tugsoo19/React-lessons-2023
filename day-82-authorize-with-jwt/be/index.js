@@ -1,14 +1,17 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require("mongoose")
+
+
+require('dotenv').config()
 const apiRouter = require('./routes/api')
 const adminApiRouter = require('./routes/admin-api')
 
-
 const app = express()
-const PORT = 8181
 
-const MONGO_CONNECTION_STRING = "mongodb+srv://tugsoo:bunny%401928@mongodb-tugsoo.a6x20yd.mongodb.net/day-82";
+
+const PORT = process.env.PORT
+const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING
 
 app.use(express.json())
 app.use(cors())

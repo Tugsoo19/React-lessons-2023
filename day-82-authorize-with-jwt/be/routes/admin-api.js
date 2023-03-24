@@ -2,6 +2,7 @@ const express = require('express')
 const Users = require('../models/users')
 const bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken")
+const UserRole = require('../models/userRole')
 
 
 const adminApiRouter = express.Router()
@@ -9,33 +10,35 @@ const adminApiRouter = express.Router()
 
 adminApiRouter.post('/register', async (request, response) => {
 
-    const { email, password } = request.body
-    console.log(email, password);
+    const data = request.body
+    console.log(request.body);
 
 
-    if (email && password) {
 
-        const oldUser = await Users.findOne({ email: email })
+    if (data) {
+
+        const oldUser = await Users.findOne({ email: data.email })
         if (oldUser) {
             return response.json({ error: "Already registered email" })
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10)
+        const hashedPassword = await bcrypt.hash(data.password, 10)
+        data.password = hashedPassword;
 
-        Users.create({ email: email, password: hashedPassword })
-            .then((data) => {
-                response.status(201).json({
-                    message: "User successfully created",
-                    email: data.email,
-                });
-                return;
-            })
-            .catch((error) => {
-                response.status(500).json({
-                    success: false,
-                    error,
-                });
+        try {
+            const user = await Users.create(data)
+            const result = await user.populate("userrole")
+            response.status(201).json({
+                message: "User successfully created",
+                data: result
             });
+            return;
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                error: error,
+            })
+        }
 
     } else {
         return response.json({ error: "Input field is empty" })
@@ -92,6 +95,22 @@ adminApiRouter.post('/login', async (request, response) => {
         console.error(error);
     }
 
+})
+
+adminApiRouter.post('/role/create', async (req, res) => {
+    const { name } = req.body;
+    const result = await UserRole.create({ name })
+
+    res.status(200).json({
+        data: result,
+    })
+})
+
+adminApiRouter.get('/role/list', async (req, res) => {
+    const result = await UserRole.find({})
+    res.status(200).json({
+        data: result,
+    })
 })
 
 module.exports = adminApiRouter
