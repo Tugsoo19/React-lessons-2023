@@ -1,0 +1,66 @@
+.main {
+    display: flex;
+
+    justify-content: space-evenly;
+    color: white;
+    padding: 10px;
+    height: 84px;
+    background-color: #FA320A;
+    align-items: center;
+    gap: 20px
+}
+
+.left {
+    display: flex;
+    gap: 20px;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 470px;
+
+}
+
+.login {
+    display: flex;
+    gap: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    padding-left: 90px;
+
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.logo {
+    height: 50px;
+    width: 140px;
+}
+
+.input {
+    height: 30px;
+    width: 300px;
+    border-radius: 26px;
+    padding-left: 40px;
+    font-size: 13px;
+    background-image: url(../../public/3917132.png) white;
+    background-position: 10px 10px;
+    border: 1px solid white;
+    background-color: rgba(0, 0, 0, 0.4);
+
+}
+
+.input::placeholder {
+    color: white;
+}
