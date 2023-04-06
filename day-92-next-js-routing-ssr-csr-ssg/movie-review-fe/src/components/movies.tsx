@@ -61,16 +61,29 @@ export default function Movies(): JSX.Element {
 
 
     return (
-        <div>
+        <div >
             <h1>Movies list</h1>
 
-            {movies.map((movie, index) => (
-                <div key={index}>
-                    <a>{movie.title}</a>
-                    <ul>{movie.plot}</ul>
-                    <img src={movie.poster} />
-                </div>
-            ))}
+            <div className="flex flex-wrap">
+                {movies.map((movie, index) => (
+                    <div key={index} className="mx-auto">
+                        <div className="mx-auto">
+
+                            {/* <ul>{movie.plot}</ul> */}
+                            <img src={movie.poster} className="w-44 h-64 m-1 rounded-md" />
+                            <div className="flex">
+                                <img src="https://www.rottentomatoes.com/assets/pizza-pie/images/icons/tomatometer/certified_fresh-notext.56a89734a59.svg" className="w-5 h-5" />
+                                <a>{movie.tomatoes.viewer.meter}%</a>
+                            </div>
+                            <p className="text-sm w-44 break-words">{movie.title}</p>
+                        </div>
+
+
+                    </div>
+                ))}
+            </div>
+
+
 
 
         </div>
