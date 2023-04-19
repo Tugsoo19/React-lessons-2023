@@ -4,7 +4,7 @@ const todoRouter = express.Router()
 
 
 
-todoRouter.get('/list', async (requet, response) => {
+todoRouter.get('/list', async (request, response) => {
     const result = await Todo.find({}).populate("category")
 
 
