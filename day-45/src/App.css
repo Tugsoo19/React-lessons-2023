@@ -1,15 +1,103 @@
 .App {
   text-align: center;
+  width: 500px;
+  background-color: white;
+  margin: 0 auto;
 }
-
 
 nav {
   display: flex;
-  gap: 20px;
-  align-items: center;
   justify-content: center;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .active {
-  background-color: aqua;
+  background-color: #ff5a3c;
+  text-decoration: none;
+  padding: 5px 10px;
+  color: #ededef;
+  width: 30%;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.nonactive {
+  background-color: #ededef;
+  text-decoration: none;
+  padding: 5px 10px;
+  color: #21262e;
+  width: 30%;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.social {
+  border-radius: 20px;
+  border: 1px solid black;
+  width: 60%;
+  height: 40px;
+  margin: 5px;
+  margin-top: 10px;
+  background-color: white;
+  align-items: center;
+}
+
+.social a {
+  margin: 5px;
+  color: #42424b;
+}
+
+.or {
+  width: 60%;
+  border-bottom: 1px solid #42424b;
+  line-height: 0.1em;
+  margin: 10px auto;
+}
+
+.or span {
+  background: #fff;
+  padding: 0 10px;
+}
+
+form {
+  margin: 20px auto;
+  width: 60%;
+  text-align: left;
+  align-items: center;
+}
+
+.names {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 5px;
+}
+
+.names input {
+  height: 35px;
+}
+
+form input {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #42424b;
+}
+
+form label {
+  font-size: 12px;
+}
+
+form button {
+  width: 100%;
+  height: 45px;
+  border-radius: 20px;
+  border: 1px solid #a9a4a6;
+  background-color: #a9a4a6;
+  color: #ededef;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 10px 0;
 }
